@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2 class="block text-gray-700">Login</h2>
+<form method="post" class="bg-gray-200 p-6 rounded-md text-black">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-4">
+        <label for="{{ field.id_for_label }}" class="block text-gray-700">{{ field.label }}:</label>
+        <input type="{{ field.field.widget.input_type }}" id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+    </div>
+    {% endfor %}
+    <input type="submit" value="Login" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+</form>
+{% endblock %}

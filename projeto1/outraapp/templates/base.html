@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog, aluno JC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'imagem/estilo.css' %}">
+</head>
+
+<body>
+    <div class="container mx-auto p-4">
+        <div class="text-3xl font-bold underline section-title flex justify-between">
+            <img class="logo" src="{% static 'imagem/minha_imagem.jpg' %}" alt="Descrição" width="50" height="50">
+            <h1>Blog cyber edux</h1>
+            <div>
+                {% if user.is_authenticated %}
+                Olá, {{ user.username }}!
+                <a href="{% url 'logout' %}" class="btn btn-primary mx-2">Logout</a>
+                {% if user.is_staff %}
+                    <a href="{% url 'create_post' %}" class="btn btn-primary mx-2">Criar Post</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary mx-2">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-primary mx-2">Registrar</a>
+            {% endif %}
+            </div>
+        </div>
+        {% block conteudo %}
+        {% endblock %}
+        <div class="flex justify-center">
+            <a href="{% url 'home' %}" class="btn btn-primary mx-2">Página Principal</a><!-- vai p view home-->
+            <a href="#" class="btn btn-primary mx-2" onclick="alunos()">Aluno</a>
+            <button class="btn btn-secondary mx-2" onclick="toggleDarkMode()">Modo Noturno</button>
+        </div>
+
+    <script>
+        function alunos() {
+            alert('João Carlos');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
